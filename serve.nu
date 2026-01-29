@@ -24,7 +24,7 @@ def nav-keys [down: record] {
 {|req|
   dispatch $req [
     (route {path: "/"} {|req ctx|
-      let slides = open order | lines | where $it != ""
+      let slides = ls slides/*.md | get name | sort
       let content = open ($slides | first) | .md
 
       (HTML
@@ -58,7 +58,7 @@ def nav-keys [down: record] {
     })
 
     (route {method: "GET", path: "/sse"} {|req ctx|
-      let slides = open order | lines | where $it != ""
+      let slides = ls slides/*.md | get name | sort
 
       .cat --follow --new
       | generate {|frame, state|
