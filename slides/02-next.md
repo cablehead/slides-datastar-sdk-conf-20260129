@@ -1,6 +1,5 @@
 <h1 style="font-size: 4em; letter-spacing: 0.15em;">
-<span style="color: #ff79c6;">SH</span><span style="color: #50fa7b;">A</span><span style="color: #8be9fd;">ST</span><span style="color: #50fa7b;">RA</span>
-</h1>
+<span style="color: #ff79c6;">SH</span><span style="color: #50fa7b;">A</span><span style="color: #8be9fd;">ST</span><span style="color: #50fa7b;">RA</span><span style="font-size: 0.4em; color: #6272a4;">-stack</span></h1>
 
 <p style="font-size: 2em; margin-top: 1em; letter-spacing: 0.05em;">
 (Nu)<span style="color: #ff79c6;">SH</span>ell

@@ -3,7 +3,8 @@ use http-nu/router *
 use http-nu/datastar *
 
 def slide-content [file: string] {
-  ARTICLE {id: "content" style: {flex: 1 display: flex flex-direction: column align-items: center justify-content: center}} (open $file | .md)
+  print $file
+  ARTICLE {id: "content" style: {flex: 1 display: flex flex-direction: column align-items: center justify-content: center}} (open $file | {__html: $in} | .md)
 }
 
 def head-common [] {
