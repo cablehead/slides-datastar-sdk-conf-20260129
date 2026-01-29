@@ -1,3 +1,5 @@
-# Hello, World
+# Datastar-ready with http-nu
 
-This is a slide.
+*@ndyg*
+
+Jan 29, 2025 · Datastar SDK Conf

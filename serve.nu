@@ -2,6 +2,10 @@ use http-nu/html *
 use http-nu/router *
 use http-nu/datastar *
 
+def slide-content [file: string] {
+  ARTICLE {id: "content" style: {flex: 1 display: flex flex-direction: column align-items: center justify-content: center}} (open $file | .md)
+}
+
 def head-common [] {
   [
     (META {charset: "utf-8"})
@@ -42,11 +46,10 @@ def nav-keys [down: record] {
   dispatch $req [
     (route {path: "/"} {|req ctx|
       let slides = ls slides/*.md | get name | sort
-      let content = open ($slides | first) | .md
 
       (HTML
         (HEAD ...(head-common))
-        (BODY {data-init: "@get('/sse')"}
+        (BODY {data-init: "@get('/sse')" style: {display: flex flex-direction: column}}
           (HEADER {style: {display: flex justify-content: flex-end}}
             (A {href: "/hjkl"} "hjkl")
           )
@@ -56,7 +59,7 @@ def nav-keys [down: record] {
               "data-on-keys:ctrl-h": "@get('/nav/prev')"
             }
           )
-          (ARTICLE {id: "content"} $content)
+          (slide-content ($slides | first))
         )
       )
     })
@@ -71,7 +74,7 @@ def nav-keys [down: record] {
           "prev" => ([($state - 1) 0] | math max)
           _ => $state
         }
-        let html = ARTICLE {id: "content"} (open ($slides | get $idx) | .md)
+        let html = slide-content ($slides | get $idx)
         {out: ($html | to datastar-patch-elements), next: $idx}
       } 0
       | to sse

@@ -8,7 +8,6 @@ body {
   margin: 0 auto;
   min-height: 100vh;
   padding-top: 40px;
-
 }
 
 h1, h2, h3 {
@@ -16,12 +15,12 @@ h1, h2, h3 {
   margin-bottom: 0.5em;
 }
 
-h1 { font-size: 2.5em; }
-h2 { font-size: 2em; }
-h3 { font-size: 1.5em; }
+h1 { font-size: 3.5em; }
+h2 { font-size: 2.5em; }
+h3 { font-size: 2em; }
 
 p {
-  font-size: 1.25em;
+  font-size: 1.75em;
   line-height: 1.6;
   margin-bottom: 0.75em;
 }
