@@ -161,11 +161,11 @@ def nav-keys [down: record] {
     })
 
     (route {method: "GET", path: "/hjkl/sse"} {|req ctx|
-      .cat --follow --new -T press
-      | generate {|frame, state|
+      .cat --follow --new --topic press
+      | generate {|frame, state={h: false, j: false, k: false, l: false}|
         let state = $state | upsert $frame.meta.key ($frame.meta.action == "down")
         {out: (nav-keys $state | to datastar-patch-elements), next: $state}
-      } {h: false, j: false, k: false, l: false}
+      }
       | to sse
     })
 
