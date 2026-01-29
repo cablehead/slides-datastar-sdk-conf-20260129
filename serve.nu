@@ -51,7 +51,7 @@ def nav-keys [down: record] {
         (HEAD ...(head-common))
         (BODY {data-init: "@get('/sse')" style: {display: flex flex-direction: column}}
           (HEADER {style: {display: flex justify-content: flex-end}}
-            (A {href: "/hjkl"} "hjkl")
+            (A {href: "/spacebar"} "spacebar") (SPAN {style: {width: 2em display: inline-block}}) (A {href: "/hjkl"} "hjkl")
           )
           (DIV
             {
@@ -76,6 +76,61 @@ def nav-keys [down: record] {
         }
         let html = slide-content ($slides | get $idx)
         {out: ($html | to datastar-patch-elements), next: $idx}
+      } 0
+      | to sse
+    })
+
+    (route {path: "/spacebar"} {|req ctx|
+      (HTML
+        (HEAD ...(head-common))
+        (BODY {data-init: "@get('/spacebar/sse')" style: {display: flex flex-direction: column}}
+          (HEADER {style: {display: flex justify-content: flex-start}}
+            (NAV (A {href: "/"} "home") " / spacebar")
+          )
+          (DIV {"data-on-keys:space": "@get('/spacebar/press')"})
+          (DIV {id: "spacebar-count" style: {
+            flex: 1
+            display: flex
+            flex-direction: column
+            align-items: center
+            justify-content: center
+          }} [
+            (SPAN {style: {
+              font-family: ["SF Mono" "Fira Code" "JetBrains Mono" monospace]
+              font-size: 12em
+              font-weight: bold
+              color: "#bd93f9"
+            }} "0")
+            (P {style: {color: "#6272a4" margin-top: "0.5em"}} "press the space bar")
+          ])
+        )
+      )
+    })
+
+    (route {method: "GET", path: "/spacebar/press"} {|req ctx|
+      null | .append spacebar --meta {req: $req} | ignore
+    })
+
+    (route {method: "GET", path: "/spacebar/sse"} {|req ctx|
+      .cat --follow -T spacebar
+      | generate {|frame, state|
+        let count = $state + 1
+        let html = DIV {id: "spacebar-count" style: {
+          flex: 1
+          display: flex
+          flex-direction: column
+          align-items: center
+          justify-content: center
+        }} [
+          (SPAN {style: {
+            font-family: ["SF Mono" "Fira Code" "JetBrains Mono" monospace]
+            font-size: 12em
+            font-weight: bold
+            color: "#bd93f9"
+          }} ($count | into string))
+          (P {style: {color: "#6272a4" margin-top: "0.5em"}} "press the space bar")
+        ]
+        {out: ($html | to datastar-patch-elements), next: $count}
       } 0
       | to sse
     })
