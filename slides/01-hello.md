@@ -5,7 +5,15 @@
 </p>
 
 <p style="font-size: 1.2em; margin-top: 0.5em; color: #6272a4;">
-Jan 29, 2025 - Datastar SDK Conf
+<a href="https://www.youtube.com/live/lc48MUnS2wM?si=dSV_u5nzXj2xVjBa&t=510" style="color: #6272a4;">Jan 29, 2025 - Datastar SDK Conf</a>
 </p>
 
-<img src="https://http-nu.cross.stream/og.png" style="max-width: 80%; max-height: 40vh; border-radius: 10px; margin-top: 1em; transform: rotate(-0.6deg);">
+<div style="margin-top: 1em; text-align: center;">
+<a href="https://http-nu.cross.stream/" style="display: block;">
+<img src="https://http-nu.cross.stream/og.png" style="max-width: 80%; max-height: 35vh; border-radius: 10px; transform: rotate(-0.6deg);">
+</a>
+</div>
+
+<p style="font-size: 0.9em; margin-top: 1em; color: #6272a4;">
+ctrl-h / ctrl-l to navigate
+</p>
