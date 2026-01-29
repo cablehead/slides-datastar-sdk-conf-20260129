@@ -24,7 +24,8 @@ def nav-keys [down: record] {
 {|req|
   dispatch $req [
     (route {path: "/"} {|req ctx|
-      let content = open slide.md | .md
+      let slides = open order | lines | where $it != ""
+      let content = open ($slides | first) | .md
 
       (HTML
         (HEAD
@@ -47,6 +48,7 @@ def nav-keys [down: record] {
               "data-on-keys:k__up": "@get('/press/up/k')"
               "data-on-keys:l__up": "@get('/press/up/l')"
               "data-on-keys:ctrl-l": "@get('/nav/next')"
+              "data-on-keys:ctrl-h": "@get('/nav/prev')"
             }
           )
           (ARTICLE {id: "content"} $content)
@@ -56,14 +58,18 @@ def nav-keys [down: record] {
     })
 
     (route {method: "GET", path: "/sse"} {|req ctx|
-      let slides = [slide.md next.md]
+      let slides = open order | lines | where $it != ""
 
       .cat --follow --new
       | generate {|frame, state|
         let state = match $frame.topic {
           "press" => ($state | upsert keys ($state.keys | upsert $frame.meta.key ($frame.meta.action == "down")))
           "nav" => {
-            let idx = [($state.slide + 1) (($slides | length) - 1)] | math min
+            let idx = match $frame.meta.action {
+              "next" => ([($state.slide + 1) (($slides | length) - 1)] | math min)
+              "prev" => ([($state.slide - 1) 0] | math max)
+              _ => $state.slide
+            }
             $state | upsert slide $idx
           }
           _ => $state
@@ -88,8 +94,8 @@ def nav-keys [down: record] {
       null | .append press --meta {key: $ctx.key, action: $ctx.action} --ttl ephemeral | ignore
     })
 
-    (route {method: "GET", path: "/nav/next"} {|req ctx|
-      null | .append nav --meta {action: next} --ttl ephemeral | ignore
+    (route {method: "GET", path-matches: "/nav/:action"} {|req ctx|
+      null | .append nav --meta {action: $ctx.action} --ttl ephemeral | ignore
     })
 
     (route true {|req ctx|
