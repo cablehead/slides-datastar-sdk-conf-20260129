@@ -1,101 +1,25 @@
 use http-nu/html *
-
-let css = "
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  background: #282a36;
-  color: #f8f8f2;
-  font-family: system-ui, -apple-system, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 2em;
-}
-
-article {
-  max-width: 900px;
-  width: 100%;
-}
-
-h1, h2, h3 {
-  color: #bd93f9;
-  margin-bottom: 0.5em;
-}
-
-h1 { font-size: 2.5em; }
-h2 { font-size: 2em; }
-h3 { font-size: 1.5em; }
-
-p {
-  font-size: 1.25em;
-  line-height: 1.6;
-  margin-bottom: 0.75em;
-}
-
-a {
-  color: #8be9fd;
-  text-decoration: none;
-}
-
-a:hover { text-decoration: underline; }
-
-strong { color: #ff79c6; }
-em { color: #f1fa8c; }
-
-ul, ol {
-  font-size: 1.25em;
-  line-height: 1.6;
-  margin-left: 1.5em;
-  margin-bottom: 0.75em;
-}
-
-pre {
-  background: #1e1f29;
-  border-radius: 10px;
-  padding: 1em;
-  overflow-x: auto;
-  margin-bottom: 0.75em;
-  max-height: 80vh;
-}
-
-code {
-  font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', monospace;
-  font-size: 0.9em;
-}
-
-p code {
-  background: #44475a;
-  padding: 0.15em 0.4em;
-  border-radius: 4px;
-}
-
-img {
-  border-radius: 10px;
-  max-width: 100%;
-}
-
-blockquote {
-  border-left: 4px solid #6272a4;
-  padding-left: 1em;
-  margin-bottom: 0.75em;
-  color: #6272a4;
-  font-size: 1.25em;
-}
-"
+use http-nu/router *
 
 {|req|
-  let content = open slide.md | .md
+  dispatch $req [
+    (route {path: "/"} {|req ctx|
+      let content = open slide.md | .md
 
-  (HTML
-    (HEAD
-      (META {charset: "utf-8"})
-      (META {name: "viewport" content: "width=device-width, initial-scale=1"})
-      (STYLE $css)
-    )
-    (BODY
-      (ARTICLE $content)
-    )
-  )
+      (HTML
+        (HEAD
+          (META {charset: "utf-8"})
+          (META {name: "viewport" content: "width=device-width, initial-scale=1"})
+          (LINK {rel: "stylesheet" href: "/style.css"})
+        )
+        (BODY
+          (ARTICLE $content)
+        )
+      )
+    })
+
+    (route true {|req ctx|
+      .static "./static" $req.path
+    })
+  ]
 }
