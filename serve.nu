@@ -29,7 +29,6 @@ def nav-keys [down: record] {
     justify-content: space-around
     align-items: center
     flex: 1
-    border: "1px solid white"
   }
   } [
     (nav-key H --down=($down.h))
