@@ -52,7 +52,7 @@ def nav-keys [down: record] {
         (HEAD ...(head-common))
         (BODY {data-init: "@get('/sse')" style: {display: flex flex-direction: column}}
           (HEADER {style: {display: flex justify-content: flex-end}}
-            (A {href: "https://www.youtube.com/live/lc48MUnS2wM?si=dSV_u5nzXj2xVjBa&t=510"} "youtube stream") (SPAN {style: {width: 2em display: inline-block}}) (A {href: "https://github.com/cablehead/slides-datastar-sdk-conf-20250129"} "slide source") (SPAN {style: {width: 2em display: inline-block}}) (SPAN {style: {color: "#6272a4"}} "examples / demos:") (SPAN {style: {width: 1em display: inline-block}}) (A {href: "/spacebar"} "spacebar") (SPAN {style: {width: 2em display: inline-block}}) (A {href: "/hjkl"} "hjkl")
+            (A {href: "https://www.youtube.com/live/lc48MUnS2wM?si=dSV_u5nzXj2xVjBa&t=510"} "youtube stream") (SPAN {style: {width: 2em display: inline-block}}) (A {href: "https://github.com/cablehead/slides-datastar-sdk-conf-20260129"} "slide source") (SPAN {style: {width: 2em display: inline-block}}) (SPAN {style: {color: "#6272a4"}} "examples / demos:") (SPAN {style: {width: 1em display: inline-block}}) (A {href: "/spacebar"} "spacebar") (SPAN {style: {width: 2em display: inline-block}}) (A {href: "/hjkl"} "hjkl")
           )
           (DIV
             {
