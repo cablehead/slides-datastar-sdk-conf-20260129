@@ -7,10 +7,29 @@ def slide-content [file: string] {
   ARTICLE {id: "content" style: {flex: 1 display: flex flex-direction: column align-items: center justify-content: center}} (open --raw $file | {__html: $in} | .md)
 }
 
+const SITE_URL = "https://datastar-sdk-conf-20260129.ndyg.cross.stream"
+const TITLE_TEXT = "Datastar-ready with http-nu · Datastar SDK Conf 2026"
+const DESCRIPTION = "Slides and live demos from @ndyg's talk at Datastar SDK Conf, Jan 29, 2026: serving Datastar from nushell with http-nu."
+
 def head-common [] {
   [
     (META {charset: "utf-8"})
     (META {name: "viewport" content: "width=device-width, initial-scale=1"})
+    (TITLE $TITLE_TEXT)
+    (META {name: "description" content: $DESCRIPTION})
+    (META {property: "og:type" content: "website"})
+    (META {property: "og:site_name" content: "cross.stream"})
+    (META {property: "og:url" content: $SITE_URL})
+    (META {property: "og:title" content: $TITLE_TEXT})
+    (META {property: "og:description" content: $DESCRIPTION})
+    (META {property: "og:image" content: $"($SITE_URL)/og.png"})
+    (META {property: "og:image:width" content: "1200"})
+    (META {property: "og:image:height" content: "630"})
+    (META {property: "og:image:alt" content: "Title slide: Datastar-ready with http-nu, @ndyg, Jan 29, 2026 - Datastar SDK Conf"})
+    (META {name: "twitter:card" content: "summary_large_image"})
+    (META {name: "twitter:title" content: $TITLE_TEXT})
+    (META {name: "twitter:description" content: $DESCRIPTION})
+    (META {name: "twitter:image" content: $"($SITE_URL)/og.png"})
     (LINK {rel: "stylesheet" href: "/style.css"})
     (SCRIPT {type: "importmap"} {__html: $'{"imports":{"datastar":"($DATASTAR_CDN_URL)"}}'})
     (SCRIPT {type: "module" src: $DATASTAR_CDN_URL})
