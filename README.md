@@ -2,7 +2,7 @@
 
 Replay of live stream, on youtube: [Jan 29, 2026 - Datastar SDK Conf](https://youtu.be/xN30XVJpwLU?si=RZZHPkcXfrSbq87Y&t=437)
 
-Play with the slides and examples: https://slides-datastar-sdk-conf-20260129.cross.stream
+Play with the slides and examples: https://datastar-sdk-conf-20260129.ndyg.cross.stream
 
 To run locally:
 
