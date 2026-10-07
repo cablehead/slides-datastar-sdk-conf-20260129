@@ -4,7 +4,7 @@ use http-nu/datastar *
 
 def slide-content [file: string] {
   print $file
-  ARTICLE {id: "content" style: {flex: 1 display: flex flex-direction: column align-items: center justify-content: center}} (open $file | {__html: $in} | .md)
+  ARTICLE {id: "content" style: {flex: 1 display: flex flex-direction: column align-items: center justify-content: center}} (open --raw $file | {__html: $in} | .md)
 }
 
 def head-common [] {
